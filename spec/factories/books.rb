@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :book do
-    title "MyString"
-    description "MyText"
-    price "9.99"
-    in_stock 1
+    title Faker::Commerce.product_name
+    description Faker::Lorem.paragraph(2, false, 4)
+    price Faker::Number.decimal(2).to_f
+    in_stock Faker::Number.number(2).to_i
     author nil
     category nil
   end

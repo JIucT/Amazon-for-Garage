@@ -2,9 +2,13 @@
 
 FactoryGirl.define do
   factory :credit_card do
-    number "MyString"
-    expiration_date "2014-07-24 18:43:59"
-    firstname "MyString"
-    lastname "MyString"
+    number Faker::Business.credit_card_number
+    expiration_date Faker::Business.credit_card_expiry_date
+    firstname Faker::Name.first_name
+    lastname Faker::Name.last_name
+
+    after(:create) do |credit_card|
+      create_list(:order, Faker::Number.digit.to_i, credit_card: credit_card)
+    end
   end
 end
