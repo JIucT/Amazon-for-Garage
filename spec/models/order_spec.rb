@@ -7,6 +7,7 @@ RSpec.describe Order, :type => :model do
     it { expect(order).to validate_presence_of(:total_price) }
     it { expect(order).to validate_presence_of(:completed_at) }
     it { expect(order).to validate_presence_of(:state) }
+
   end
 
   it "should have a state" do
@@ -20,12 +21,9 @@ RSpec.describe Order, :type => :model do
   context "relations" do
     it { expect(order).to belong_to(:customer) }
     it { expect(order).to belong_to(:credit_card) }
+    it { expect(order).to belong_to(:billing_address) }
+    it { expect(order).to belong_to(:shipping_address) }
     it { expect(order).to have_many(:order_items) }
-
-    it "should has billing and shipping addresses" do
-      expect(Address.find(order.shipping_address_id).class).to eq(Address)
-      expect(Address.find(order.billing_address_id).class).to eq(Address)
-    end
 
     it "should be able to add a book to the order" do
       order_item = order.order_items.create(FactoryGirl.attributes_for(:order_item))

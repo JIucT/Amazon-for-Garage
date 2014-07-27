@@ -8,7 +8,7 @@ FactoryGirl.define do
     lastname Faker::Name.last_name
 
     after(:create) do |credit_card|
-      create_list(:order, Faker::Number.digit.to_i, credit_card: credit_card)
+      create_list(:order, Faker::Number.digit.to_i + 1, credit_card: credit_card)
     end
   end
 end
