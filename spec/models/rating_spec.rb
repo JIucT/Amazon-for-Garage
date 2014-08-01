@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Rating, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:rating) { FactoryGirl.create(:rating) }
+
+  it { expect(rating.mark).to be_between(0, 10).inclusive }
+  it { expect(rating).to belong_to(:customer) }
+  it { expect(rating).to belong_to(:book) }
 end
