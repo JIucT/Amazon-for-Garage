@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :rating do
     comment Faker::Lorem.paragraph(1, true, 2)
     mark Faker::Number.digit.to_i
-    customer nil
+    user nil
     book nil
   end
 end

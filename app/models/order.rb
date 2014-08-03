@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  belongs_to :customer
+  belongs_to :user
   belongs_to :credit_card
   belongs_to :billing_address, class: Address
   belongs_to :shipping_address, class: Address 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726161605) do
+ActiveRecord::Schema.define(version: 20140801152200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,21 +61,12 @@ ActiveRecord::Schema.define(version: 20140726161605) do
     t.date     "expiration_date", null: false
     t.string   "firstname",       null: false
     t.string   "lastname",        null: false
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
-
-  create_table "customers", force: true do |t|
-    t.string   "password_digest", null: false
-    t.string   "email",           null: false
-    t.string   "firstname",       null: false
-    t.string   "lastname",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "credit_cards", ["user_id"], name: "index_credit_cards_on_user_id", using: :btree
 
   create_table "order_items", force: true do |t|
     t.decimal  "price",      null: false
@@ -95,25 +86,43 @@ ActiveRecord::Schema.define(version: 20140726161605) do
     t.string   "state",               default: "in progress", null: false
     t.integer  "billing_address_id",                          null: false
     t.integer  "shipping_address_id"
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.integer  "credit_card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "ratings", force: true do |t|
     t.text     "comment"
-    t.integer  "mark",        null: false
-    t.integer  "customer_id"
+    t.integer  "mark",       null: false
+    t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
-  add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email",                               null: false
+    t.string   "firstname",                           null: false
+    t.string   "lastname",                            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_admin",            default: false
+    t.string   "encrypted_password",  default: "",    null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

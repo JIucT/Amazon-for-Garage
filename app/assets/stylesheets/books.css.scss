@@ -1,0 +1,141 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body {
+  margin: 0px 8% 0px 8% !important;
+  padding-bottom: 70px !important;
+  background-color: transparent !important;
+} 
+
+.min-width15px {
+  min-width: 15px !important;
+}
+
+.min-width10px {
+  min-width: 10px !important;
+}
+
+.min-width50px {
+  min-width: 50px !important;
+}
+
+.min-width150px {
+  min-width: 150px !important;
+}
+
+.min-width100px {
+  min-width: 100px !important;
+}
+
+.width100 {
+  width: 100% !important;
+}
+
+.width75 {
+  width: 75%;
+}
+
+
+.width80 {
+  width: 80%;
+}
+
+/************* HEIGHT *************/
+
+.min-height1px {
+  min-height: 1px !important;
+}
+
+.min-height7px {
+  min-height: 7px !important;
+}
+
+.min-height10px {
+  min-height: 10px !important;
+}
+
+.height-inherit {
+  height: inherit !important;
+}
+
+.height100pc {
+  height: 100% !important;
+}
+
+.max-height-10px {
+  max-height: 10px !important;
+}
+
+/************ ALIGN *****************/
+
+.vertical-align-middle {
+  vertical-align: middle !important;
+}
+
+#cart-status {
+  margin-top: 1px !important;
+}
+
+#authorization_fix {
+  margin-right: 25px !important;
+}
+
+.align-center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/************ DISPLAY ***************/
+
+.display-inline {
+  display: inline !important;
+}
+
+.display-block {
+  display: block !important;
+}
+
+.display-inline-block {
+  display: inline-block !important;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.position-relative {
+  position: relative !important; 
+}
+
+.remove-sides-paddings {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.margin-sides-5px {
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+
+.margin-right110px {
+  margin-right: 110px !important;
+}
+
+.margin-right130px {
+  margin-right: 130px !important;
+}
+
+/************* TEXT **************/
+.text-align-center {
+  text-align: center !important;
+} 
+
+.break-word {
+  word-wrap: break-word !important;
+}

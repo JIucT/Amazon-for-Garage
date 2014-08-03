@@ -19,7 +19,7 @@ RSpec.describe Order, :type => :model do
   end
 
   context "relations" do
-    it { expect(order).to belong_to(:customer) }
+    it { expect(order).to belong_to(:user) }
     it { expect(order).to belong_to(:credit_card) }
     it { expect(order).to belong_to(:billing_address) }
     it { expect(order).to belong_to(:shipping_address) }
