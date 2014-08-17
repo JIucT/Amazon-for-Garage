@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140801152200) do
 
-  # These are extensions that must be enabled in order to support this database
-  # enable_extension "plpgsql"
-
   create_table "addresses", force: true do |t|
     t.string   "address1",      null: false
     t.string   "address2",      null: false

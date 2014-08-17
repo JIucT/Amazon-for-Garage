@@ -1,37 +1,35 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="navbar-header">
+  <div class="navbar-header">
     <%= link_to "The Bookstore", root_path, { class: "navbar-brand", role: "button" } %>
-    </div>
-    <div class="min-width150px min-height1px nav navbar-nav"></div>
-    <div class="min-width150px min-height1px nav navbar-nav"></div>
-    <ul class="nav navbar-nav">
-      <li><%= link_to "HOME", root_path, { class: "remove-sides-paddings"} %> </li>
-      <li><p class="navbar-text margin-sides-5px ">|</p> </li>
-      <li><%= link_to "SHOP", root_path, { class: "remove-sides-paddings"} %> </li>
-    </ul>
-    <div class="min-width150px min-height1px nav navbar-nav"></div>
-    <ul class="nav navbar-nav">
-
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="active"> <p class="navbar-text">  
-             <span class="glyphicon glyphicon-shopping-cart"></span> CART
-             <span class="badge pull-right margin-sides-5px" id="cart-status">EMPTY</span> </p>
-      </li>
-      <li><div class="min-width150px min-height1px nav navbar-nav"></div> </li>
-        <%- if user_signed_in? %>
-          <li><%= link_to "Settings", edit_user_registration_path, { class: "remove-sides-paddings"} %> </li>
-          <li><p class="navbar-text margin-sides-5px ">|</p> </li>
-          <li><%= link_to "Orders", root_path, { class: "remove-sides-paddings"} %> </li>
-          <li><p class="navbar-text margin-sides-5px ">|</p> </li>
-          <li id="authorization_fix"><%= link_to 'Sign out', destroy_user_session_path, { class: "remove-sides-paddings"}, :method => 'delete' %></li>
-        <% else %>
-          <%- if current_page? new_user_registration_path %>
-            <li id="authorization_fix"><%= link_to 'Sign in', new_user_session_path, { class: "remove-sides-paddings"} %></li>
-          <%- else %>
-            <li id="authorization_fix"><%= link_to 'Sign up', new_user_registration_path, { class: "remove-sides-paddings"} %></li>
-          <% end %>
-        <% end %> 
-      </li> 
-    </ul>
+  </div>
+  <div class="min-width400px min-height1px nav navbar-nav"></div>
+  <ul class="nav navbar-nav">
+    <% if current_page?(books_path) || current_page?(root_path) || current_page?(index_shop_books_path) %>
+      <li><a href="/books" class="remove-sides-paddings" id="main-home-link">HOME</a></li>
+      <li><p class="navbar-text margin-sides-5px ">|</p></li>
+      <li><a href="/books/index_shop" class="remove-sides-paddings" id="main-shop-link">SHOP</a></li>
+    <% end %>
+    <li><div class="min-width300px min-height1px nav navbar-nav"></div></li>
+    <li class="active"> <p class="navbar-text">  
+      <span class="glyphicon glyphicon-shopping-cart"></span> CART
+      <span class="badge pull-right margin-sides-5px" id="cart-status">EMPTY</span> </p>
+    </li>  
+  </ul>  
+  <ul class="nav navbar-nav navbar-right">
+    <li><div class="min-width150px min-height1px nav navbar-nav"></div> </li>
+      <%- if user_signed_in? %>
+        <li><%= link_to "Settings", edit_user_registration_path, { class: "remove-sides-paddings"} %> </li>
+        <li><p class="navbar-text margin-sides-5px ">|</p> </li>
+        <li><%= link_to "Orders", root_path, { class: "remove-sides-paddings"} %> </li>
+        <li><p class="navbar-text margin-sides-5px ">|</p> </li>
+        <li id="authorization_fix"><%= link_to 'Sign out', destroy_user_session_path, { class: "remove-sides-paddings", method: :delete } %></li>
+      <% else %>
+        <%- if current_page? new_user_registration_path %>
+          <li id="authorization_fix"><%= link_to 'Sign in', new_user_session_path, { class: "remove-sides-paddings"} %></li>
+        <%- else %>
+          <li id="authorization_fix"><%= link_to 'Sign up', new_user_registration_path, { class: "remove-sides-paddings"} %></li>
+        <% end %>
+      <% end %> 
+    </li> 
+  </ul>
 </nav>

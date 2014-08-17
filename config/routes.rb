@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root to: "books#index"
 
-  resources :users, :books
-
+  resources :users
+  resources :books do
+    get 'index_shop', on: :collection
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

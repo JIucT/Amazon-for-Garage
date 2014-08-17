@@ -21,12 +21,20 @@ body {
   min-width: 50px !important;
 }
 
+.min-width100px {
+  min-width: 100px !important;
+}
+
 .min-width150px {
   min-width: 150px !important;
 }
 
-.min-width100px {
-  min-width: 100px !important;
+.min-width300px {
+  min-width: 300px !important;
+}
+
+.min-width400px {
+  min-width: 400px !important;
 }
 
 .width100 {
@@ -41,6 +49,15 @@ body {
 .width80 {
   width: 80%;
 }
+
+.width90 {
+  width: 90%;
+}
+
+.max-width100px {
+  max-width: 100px !important;
+}
+
 
 /************* HEIGHT *************/
 
@@ -72,6 +89,14 @@ body {
 
 .vertical-align-middle {
   vertical-align: middle !important;
+}
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
 }
 
 #cart-status {
@@ -137,5 +162,21 @@ body {
 } 
 
 .break-word {
-  word-wrap: break-word !important;
+  word-wrap: break-word !important; 
+}
+
+.font-weight-normal {
+  font-weight: normal !important;
+}
+
+.font-size12px {
+  font-size: 12px !important;
+}
+
+.font-size14px {
+  font-size: 14px !important;
+}
+
+.font-size16px {
+  font-size: 16px !important;
 }
