@@ -15,12 +15,23 @@
         <% end %>
       </div>
     </div>
+    <ul class="pagination">
+      <li class="disabled"><span>&laquo;</span></li>
+      <% for i in 0..(@books.size/9.0).ceil %>
+        <% if (i+1 == active_page) %>
+          <li class="active pagination-item" id=<%= "#{i+1}" %> ><span><%= i+1 %> <span class="sr-only">(current)</span></span></li>
+        <% else %>
+          <li class="pagination-item" id=<%= "#{i+1}" %>><span><%= i+1 %></span></li>
+        <% end %>
+      <% end %>
+      <li class="disabled"><span>&raquo;</span></li>      
+    </ul>
   </div>
-  <ul class="list-unstyled display-inline float-right">
+  <ul class="list-unstyled display-inline float-right" id="categories">
     <li><p class="font-size14px">SHOP BY CATEGORIES</p></li>
-    <li><a href="/books/index_shop" id="main-shop-link">Mobile development</a></li>
-    <li><a href="/books/index_shop" id="main-shop-link">Photography</a></li>
-    <li><a href="/books/index_shop" id="main-shop-link">Web design</a></li>
-    <li><a href="/books/index_shop" id="main-shop-link">Web development</a></li>    
+    <li><a href="/books/index_shop?category=Mobile+development" class="internal-ref" id="mobile-dev">Mobile development</a></li>
+    <li><a href="/books/index_shop?category=Photography" class="internal-ref" id="photography">Photography</a></li>
+    <li><a href="/books/index_shop?category=Web+design" class="internal-ref" id="web-design">Web design</a></li>
+    <li><a href="/books/index_shop?category=Web+development" class="internal-ref" id="web-dev">Web development</a></li>    
   </ul>
 </div>
