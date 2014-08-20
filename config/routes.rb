@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :books do
     get 'index_shop', on: :collection
+  #  get 'index_shop/:active_page', to: 'books#index_shop', on: :collection
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

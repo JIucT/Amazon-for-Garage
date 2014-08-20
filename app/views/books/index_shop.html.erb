@@ -1,6 +1,15 @@
 <div id="main" class="width90 align-center"> 
   <div class="float-left">
-    <h4>Shop</h4>
+    <% if category.nil? %>    
+      <h3>Shop</h4>
+    <% else %>
+      <ul class="list-inline padding-bottom0px margin-bottom0px max-height20px">
+        <li class="remove-sides-paddings"><a href="/books" class="internal-ref main-home-link">HOME</a></li>
+        <li class="remove-sides-paddings"><p class="vertical-align-middle font-size20px">&raquo;&raquo;</p></li>
+        <li class="remove-sides-paddings"><a href="/books/index_shop" class="internal-ref main-shop-link">SHOP</a></li>        
+      </ul>
+      <h3 class='margin-top0px'>Categories - <%=category%></h3>
+    <% end %>
     <div id="books_grid" class="container">
       <div class="row">
         <% @books.each_with_index do | book, index | %>
@@ -15,17 +24,27 @@
         <% end %>
       </div>
     </div>
-    <ul class="pagination">
-      <li class="disabled"><span>&laquo;</span></li>
-      <% for i in 0..(@books.size/9.0).ceil %>
-        <% if (i+1 == active_page) %>
-          <li class="active pagination-item" id=<%= "#{i+1}" %> ><span><%= i+1 %> <span class="sr-only">(current)</span></span></li>
+    <div class="text-center">
+      <ul class="pagination">
+        <% if active_page != 1 %>
+          <li class="pagination-item" id=<%="#{active_page-1}"%>><span>&laquo;</span></li>        
         <% else %>
-          <li class="pagination-item" id=<%= "#{i+1}" %>><span><%= i+1 %></span></li>
+          <li class="disabled"><span>&laquo;</span></li>
         <% end %>
-      <% end %>
-      <li class="disabled"><span>&raquo;</span></li>      
-    </ul>
+        <% for i in 1..pages_number %>
+          <% if (i == active_page) %>
+            <li class="active pagination-item" id=<%= "#{i}" %> ><span><%= i %> <span class="sr-only">(current)</span></span></li>
+          <% else %>
+            <li class="pagination-item" id=<%= "#{i}" %>><span><%= i %></span></li>
+          <% end %>
+        <% end %>
+        <% if active_page != pages_number %>
+          <li class="pagination-item" id=<%="#{active_page+1}"%>><span>&raquo;</span></li>        
+        <% else %>
+          <li class="disabled"><span>&raquo;</span></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
   <ul class="list-unstyled display-inline float-right" id="categories">
     <li><p class="font-size14px">SHOP BY CATEGORIES</p></li>

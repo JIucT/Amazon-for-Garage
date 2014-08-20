@@ -81,8 +81,16 @@ body {
   height: 100% !important;
 }
 
-.max-height-10px {
+.max-height10px {
   max-height: 10px !important;
+}
+
+.max-height15px {
+  max-height: 15px !important;
+}
+
+.max-height20px {
+  max-height: 20px !important;
 }
 
 /************ ALIGN *****************/
@@ -97,6 +105,10 @@ body {
 
 .float-right {
   float: right !important;
+}
+
+.float-none {
+  float: none !important;
 }
 
 #cart-status {
@@ -180,3 +192,27 @@ body {
 .font-size16px {
   font-size: 16px !important;
 }
+
+.font-size20px {
+  font-size: 20px !important;
+}
+
+/************* COLORS **************/
+.blue-light {
+  color: #005CE6 !important;
+}
+
+/************ MARGIN/PADDING **************/
+
+.margin-top0px {
+  margin-top: 0px !important;
+}
+
+.margin-bottom0px {
+  margin-bottom: 0px !important;
+}
+
+.padding-bottom0px {
+  padding-bottom: 0px !important;
+}
+

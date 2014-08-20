@@ -29,28 +29,48 @@ $(document).ready( function() {
   };
 
   function markShopCategories() {
-    $.each($.makeArray($("#categories li a")), function(index, elem) {  
+    $(".main-shop-link").click( function() {
+      replaceMain("/books/index_shop");
+    });
+
+    $(".main-home-link").click( function() {
+      replaceMain("/books");
+    });       
+    $.each($.makeArray($("#categories li a")), function(index, elem) {        
       $("#"+elem.id).click( function() {
         replaceMain("/books/index_shop", { no_layout: true, category: elem.innerHTML })
       });    
+    });
+
+    $(".pagination-item").click( function() {
+      booksCategory = location.href.match(/category=[\w+]+/);
+      if (booksCategory)
+        booksCategory = booksCategory[0].substr(9).replace('+', ' ');      
+      replaceMain("/books/index_shop", { no_layout: true, active_page: this.id, category: booksCategory });
+      if (location.href.indexOf('?') == -1)
+        history.pushState(null, '', '?active_page='+this.id);
+      else {
+        var oldParams = location.href.substr(location.href.indexOf('?'));
+        if (location.href.indexOf('active_page=') == -1) {      
+          history.pushState(null, '', 'index_shop'+oldParams+'&active_page='+this.id);
+        } else {
+          history.pushState(null, '', 'index_shop'+oldParams.replace(/active_page=\d+/,
+                                                               'active_page='+this.id));
+        }
+      }
     });
   }
 
   carouselSetUp();
   markShopCategories();
 
-  $("#main-shop-link").click( function() {
+  $(".main-shop-link").click( function() {
     replaceMain("/books/index_shop");
   });
 
-  $("#main-home-link").click( function() {
+  $(".main-home-link").click( function() {
     replaceMain("/books");
-  })
-
-  $(".pagination-item").click( function() {
-    replaceMain("/books/index_shop", { no_layout: true, active_page: this.id });
-  })
-
+  });    
 
   if (history && history.pushState){
    $('body').on('click', '.internal-ref', function(e){
