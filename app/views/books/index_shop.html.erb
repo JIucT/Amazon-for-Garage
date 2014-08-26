@@ -14,7 +14,7 @@
       <div class="row">
         <% @books.each_with_index do | book, index | %>
           <div class="col-sm-1 col-md-3 col-lg-4">
-            <%= image_tag 'test.jpg', { class: "display-block align-center", size: '160' } %>
+            <%= image_tag book.cover, { class: "display-block align-center", size: '160' } %>
             <%= link_to book.title, book_path(book), { class: "text-align-center display-block" } %>
             <p class="text-align-center"> $<%= book.price %> </p>
           </div>

@@ -5,7 +5,6 @@ RSpec.describe Order, :type => :model do
 
   context "validations" do
     it { expect(order).to validate_presence_of(:total_price) }
-    it { expect(order).to validate_presence_of(:completed_at) }
     it { expect(order).to validate_presence_of(:state) }
 
   end

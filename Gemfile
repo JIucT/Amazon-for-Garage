@@ -36,6 +36,10 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem 'jquery-star-rating-rails'
+gem 'cancancan', '~> 1.9'
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'devise'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.2.0'

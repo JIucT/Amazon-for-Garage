@@ -8,11 +8,15 @@
       <li><a href="/books" class="remove-sides-paddings internal-ref main-home-link">HOME</a></li>
       <li><p class="navbar-text margin-sides-5px ">|</p></li>
       <li><a href="/books/index_shop" class="remove-sides-paddings internal-ref main-shop-link">SHOP</a></li>
+      <% if can? :manage, :all %>
+        <li><p class="navbar-text margin-sides-5px ">|</p></li>
+        <li><a href="/admin" class="remove-sides-paddings">Administrate</a></li>
+      <% end %>
     <% end %>
     <li><div class="min-width300px min-height1px nav navbar-nav"></div></li>
-    <li class="active"> <p class="navbar-text">  
+    <li> <a href="#" class="nav navbar-nav">
       <span class="glyphicon glyphicon-shopping-cart"></span> CART
-      <span class="badge pull-right margin-sides-5px" id="cart-status">EMPTY</span> </p>
+      <span class="badge pull-right margin-sides-5px" id="cart-status"><%= cart_status %></span></a>
     </li>  
   </ul>  
   <ul class="nav navbar-nav navbar-right">

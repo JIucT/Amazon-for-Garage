@@ -12,6 +12,7 @@ RSpec.describe User, :type => :model do
 
   context "relation" do
     it { expect(user).to have_many(:orders) }
+    it { expect(user).to belong_to(:current_order) }    
     it { expect(user).to have_many(:ratings) }
 
     it "should be able to create a new order" do

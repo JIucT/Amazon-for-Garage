@@ -45,6 +45,9 @@ body {
   width: 75%;
 }
 
+.width65 {
+  width: 65%;
+}
 
 .width80 {
   width: 80%;
@@ -54,8 +57,20 @@ body {
   width: 90%;
 }
 
+.width60px {
+  width: 60px !important;
+}
+
+.width50px {
+  width: 50px !important;
+}
+
 .max-width100px {
   max-width: 100px !important;
+}
+
+.width-auto {
+  width: auto !important;
 }
 
 
@@ -94,10 +109,6 @@ body {
 }
 
 /************ ALIGN *****************/
-
-.vertical-align-middle {
-  vertical-align: middle !important;
-}
 
 .float-left {
   float: left !important;
@@ -168,10 +179,97 @@ body {
   margin-right: 130px !important;
 }
 
+/************ MARGIN/PADDING **************/
+
+.margin-top0px {
+  margin-top: 0px !important;
+}
+
+.margin-top20px {
+  margin-top: 20px !important;
+}
+
+.margin-top30px {
+  margin-top: 30px !important;
+}
+
+.margin-top10px {
+  margin-top: 10px !important;
+}
+
+.margin-bottom0px {
+  margin-bottom: 0px !important;
+}
+
+.margin-left0px {
+  margin-left: 0px !important;
+}
+
+.margin-bottom15px {
+  margin-bottom: 15px !important;
+}
+
+.margin-left30px {
+  margin-left: 30px !important;
+}
+
+.margin-left15px {
+  margin-left: 15px !important;
+}
+
+.margin-left900px {
+  margin-left: 900px !important;
+}
+
+.margin-left540px {
+  margin-left: 540px !important;
+}
+
+.margin-left160px {
+  margin-left: 160px !important;
+}
+
+.margin-right15px {
+  margin-right: 15px !important;
+}
+
+.padding-all10px {
+  padding: 10px !important;
+}
+
+.padding-left15px {
+ /* padding-left: 15px !important; */
+  padding-left: 15px !important;
+}
+
+.padding-bottom0px {
+  padding-bottom: 0px !important;
+}
+
+.padding-bottom15px {
+  padding-bottom: 15px !important;
+}
+
 /************* TEXT **************/
 .text-align-center {
   text-align: center !important;
 } 
+
+.text-align-right {
+  text-align: right !important;
+}
+
+.vertical-align-text-middle {
+  vertical-align: text-middle !important;
+}
+
+.vertical-align-text-top {
+  vertical-align: text-top !important;
+}
+
+.vertical-align-text-bottom {
+  vertical-align: text-bottom !important;
+}
 
 .break-word {
   word-wrap: break-word !important; 
@@ -202,17 +300,10 @@ body {
   color: #005CE6 !important;
 }
 
-/************ MARGIN/PADDING **************/
-
-.margin-top0px {
-  margin-top: 0px !important;
+.opacity0 {
+  opacity: 0.0 !important;
 }
 
-.margin-bottom0px {
-  margin-bottom: 0px !important;
+.opacity1 {
+  opacity: 1.0 !important;
 }
-
-.padding-bottom0px {
-  padding-bottom: 0px !important;
-}
-

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801152200) do
+ActiveRecord::Schema.define(version: 20140825144958) do
 
   # These are extensions that must be enabled in order to support this database
-  # enable_extension "plpgsql"
+  enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
     t.string   "address1",      null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140801152200) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cover"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
@@ -81,10 +82,9 @@ ActiveRecord::Schema.define(version: 20140801152200) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.decimal  "total_price",                                 null: false
-    t.datetime "completed_at",                                null: false
+    t.decimal  "total_price",         default: 0.0,           null: false
     t.string   "state",               default: "in progress", null: false
-    t.integer  "billing_address_id",                          null: false
+    t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
     t.integer  "user_id"
     t.integer  "credit_card_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140801152200) do
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title",      null: false
   end
 
   add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
@@ -121,6 +122,7 @@ ActiveRecord::Schema.define(version: 20140801152200) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "current_order_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

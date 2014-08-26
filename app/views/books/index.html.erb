@@ -4,10 +4,10 @@
   <% active = true %>
   <div class="carousel-inner">
     <% @books.each do |book| %>
-      <% if active %> 
+      <% if active %>
         <div class="item active"> 
       <% else %>
-        <div class="item"> 
+        <div class="item">
       <% end %>
         <div class="width75 align-center">
           <div class="display-block">
@@ -17,7 +17,7 @@
           </div>
           <div class="display-block min-height10px"></div>
             <div class="display-block">
-              <%= image_tag 'test.jpg', { class: "display-inline", size: '160' } %>
+              <%= image_tag book.cover, { class: "display-inline", size: '160' } %>
               <div class="min-width10px min-height1px display-inline-block"></div>
               <div class="display-inline position-absolute margin-right130px">
                 <p class="break-word"><%= book.description %></p>
@@ -27,7 +27,7 @@
       </div>
       <% active = false %>
     <% end %>
-  </div>  
+  </div>
  
   <!-- Controls -->
   <a class="left carousel-control" id="main-corusel-prev" role="button">

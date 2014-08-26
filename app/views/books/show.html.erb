@@ -1,0 +1,42 @@
+<div class="main width65 align-center">
+  <h3><%= @book.title %></h3>
+  <div class="">
+    <%= image_tag @book.cover, { class: "display-inline", size: '220' } %>
+    <div class="form-inline display-inline margin-left30px position-absolute">
+      <span class="label label-default font-size20px"><%= "$"+@book.price.to_s %></span>    
+      <div class="input-group display-inline-block margin-left540px">
+        <input type="text" class="text-align-right width60px form-control spinedit" value='1'/>
+        <span class="input-group-btn display-inline-block">
+          <button class="btn btn-default" id="add-to-cart" type="submit">ADD TO CART</button>
+        </span>        
+      </div>
+      <div class="margin-top20px padding-all10px display-block position-absolute ">
+        <p class="break-word font-size16px"><%= @book.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="margin-top30px margin-bottom15px">
+    <h5 class="display-inline font-size16px"><strong>Reviews</strong></h5>
+    <%= link_to 'Add review', '#', { class: "margin-left30px dislpay-inline"} %>
+  </div>
+  <% @book.ratings.each do |rating| %>
+    <% user = User.where(id: rating.user_id).first %>
+    <div class="row margin-left0px vertical-align-text-bottom">   
+      <% for i in 1..5 %>
+        <% if i==rating.mark %>
+          <input name=<%="star#{rating.id}"%> type="radio" class="star" checked="checked" disabled="disabled"/>
+        <% else %>
+          <input name=<%="star#{rating.id}"%> type="radio" class="star"  disabled="disabled"/>
+        <% end %>
+      <% end %>
+      <div class="col-xs-8">
+        <p class="display-inline-block"><strong><%= rating.title %></strong></p>
+        <p class="display-inline-block margin-left30px"><small>by <%= link_to user.firstname+' '+user.lastname, user_path(user.id) %></small><p>
+      </div>
+      <p class="display-inline-block margin-left160px text-align-right"><small><%= rating.updated_at.to_date.to_formatted_s(:long) %></small></p>        
+    </div>
+    <div class="well well-lg">
+      <p class="break-word margin-bottom0px"><%= rating.comment %></p>
+    </div>    
+  <% end %>
+</div>
