@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'  
   # The priority is based upon order of creation: first created -> highest priority.
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   resources :books do
     get 'index_shop', on: :collection
   end
+
+  #post controller: "ratings", action: "create"
+  post "ratings" => 'ratings#create', as: :create_rating
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

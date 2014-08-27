@@ -1,0 +1,19 @@
+<div class="row margin-left0px vertical-align-text-bottom">   
+  <% for i in 1..5 %>
+    <% if i == @rating.mark %>
+      <input name=<%="star#{@rating.id}"%> type="radio" class="star" checked="checked" disabled="disabled"/>
+    <% else %>
+      <input name=<%="star#{@rating.id}"%> type="radio" class="star"  disabled="disabled"/>
+    <% end %>
+  <% end %>
+  <div class="col-xs-8">
+    <p class="display-inline-block"><strong><%= @rating.title %></strong></p>
+    <p class="display-inline-block margin-left30px"><small>by <%= link_to user.firstname+' '+user.lastname, user_path(user.id) %></small></p>
+  </div>
+  <p class="display-inline-block margin-left160px text-align-right"><small><%= @rating.updated_at.to_date.to_formatted_s(:long) %></small></p>        
+</div>
+<% if @rating.comment != '' %>
+  <div class="well well-lg">
+    <p class="break-word margin-bottom0px"><%= @rating.comment %></p>
+  </div>    
+<% end %>

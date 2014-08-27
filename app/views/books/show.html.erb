@@ -17,8 +17,25 @@
   </div>
   <div class="margin-top30px margin-bottom15px">
     <h5 class="display-inline font-size16px"><strong>Reviews</strong></h5>
-    <%= link_to 'Add review', '#', { class: "margin-left30px dislpay-inline"} %>
+    <% if user_signed_in? %>
+      <% if @add_review %>
+        <%= link_to 'Add review', '#', { class: "margin-left30px dislpay-inline", id: "add-review"} %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Sign in to add review', '/users/sign_in', { class: "margin-left30px dislpay-inline"} %>    
+    <% end %>    
   </div>
+  <form class="form-horizontal display-none width65 align-center" id="review-form" role="form">
+    <% for i in 1..5 %>
+      <input name="star" id="star" type="radio" class="star review-rating" value=<%="#{i}"%> />
+    <% end %>                    
+    <div class="form-group">
+      <label class="sr-only" for="short-feedback">Short Feedback</label>
+      <input type="text" class="form-control width81" id="short-feedback" placeholder="Short feedback"/>
+    </div>
+      <textarea class="form-control margin-bottom5px" id="comment" rows="3" placeholder="Review"></textarea>
+    <button type="button" id="send-review" class="width10 btn btn-default margin-bottom10px">Send</button>
+  </form>
   <% @book.ratings.each do |rating| %>
     <% user = User.where(id: rating.user_id).first %>
     <div class="row margin-left0px vertical-align-text-bottom">   
@@ -31,12 +48,14 @@
       <% end %>
       <div class="col-xs-8">
         <p class="display-inline-block"><strong><%= rating.title %></strong></p>
-        <p class="display-inline-block margin-left30px"><small>by <%= link_to user.firstname+' '+user.lastname, user_path(user.id) %></small><p>
+        <p class="display-inline-block margin-left30px"><small>by <%= link_to user.firstname+' '+user.lastname, user_path(user.id) %></small></p>
       </div>
       <p class="display-inline-block margin-left160px text-align-right"><small><%= rating.updated_at.to_date.to_formatted_s(:long) %></small></p>        
     </div>
-    <div class="well well-lg">
-      <p class="break-word margin-bottom0px"><%= rating.comment %></p>
-    </div>    
+    <% if rating.comment != '' %>
+      <div class="well well-lg">
+        <p class="break-word margin-bottom0px"><%= rating.comment %></p>
+      </div>    
+    <% end %>
   <% end %>
 </div>

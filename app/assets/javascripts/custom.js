@@ -29,13 +29,6 @@ $(document).ready( function() {
   };
 
   function markShopCategories() {
-    $(".main-shop-link").click( function() {
-      replaceMain("/books/index_shop");
-    });
-
-    $(".main-home-link").click( function() {
-      replaceMain("/books");
-    });       
     $.each($.makeArray($("#categories li a")), function(index, elem) {        
       $("#"+elem.id).click( function() {
         replaceMain("/books/index_shop", { no_layout: true, category: elem.innerHTML })
@@ -64,6 +57,8 @@ $(document).ready( function() {
   carouselSetUp();
   markShopCategories();
 
+//  $(".main-shop-link").unbind('click');
+//  $(".main-home-link").unbind('click');
   $(".main-shop-link").click( function() {
     replaceMain("/books/index_shop");
   });
