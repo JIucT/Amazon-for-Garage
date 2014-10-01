@@ -1,0 +1,22 @@
+<% if @items.nil? || @items.empty? %>
+  <p>No items in your cart</p>
+<% else %>    
+  <%= render "shared/items_summary" %>
+  <p class="float-right margin-right9">
+    SUBTOTAL:&nbsp; <b><%=@total%>$</b>
+  </p>
+  <div class="clear-both">  
+    <button type="button" class="btn btn-default" id="empty-cart">EMPTY CART</button>
+    <a href="/books/index_shop">
+      <button type="button" class="btn btn-default margin-left5px">CONTINUE SHOPPING</button>
+    </a>
+    <div class="float-right  input-group">
+      <input type="text" class="text-align-right width30 form-control" placeholder="Coupon code"/>
+      <button type="button" class="btn btn-default border-top-left-radius0px border-bottom-left-radius0px">UPDATE</button>
+      <a href="checkout">
+        <button type="button" class="btn btn-default margin-left5px">CHECKOUT</button>    
+      </a>
+    </div>
+  </div>
+<% end %>    
+

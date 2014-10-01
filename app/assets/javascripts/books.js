@@ -12,10 +12,10 @@ $(document).ready( function() {
     var bookId = (location.pathname.substr(location.pathname.lastIndexOf('/')+1)).match(/\d+/);
     var booksNumber = $(".spinedit").val();
     var value;
-    if ($.cookie('ordered_items') === 'undefined') 
-      value = bookId+'|'+booksNumber+',';
+    if ($.cookie('ordered_items')) 
+      value = $.cookie('ordered_items')+bookId+'|'+booksNumber+',';         
     else
-      value = $.cookie('ordered_items')+bookId+'|'+booksNumber+',';      
+      value = bookId+'|'+booksNumber+',';      
     $.cookie('ordered_items', value, { path: '/' });
     $("#cart-status").html($.cookie('ordered_items').match(/\,/g).length);
   });
@@ -28,7 +28,6 @@ $(document).ready( function() {
   $("#send-review").click( function() {
     var ratingVal, titleVal, commentVal;
     ratingVal = $("#review-form .star:checked").val();
-    console.log(ratingVal);
     if (ratingVal == undefined) {
       alert("Please, select rating");
       return;
@@ -40,12 +39,17 @@ $(document).ready( function() {
     }
     commentVal = $("#review-form #comment").val();
     var bookId = (location.pathname.substr(location.pathname.lastIndexOf('/')+1)).match(/\d+/)[0];    
-    $.post("/ratings", { rating: { mark: ratingVal, title: titleVal, comment: commentVal,
-                                   book_id: bookId } }, function(data) {
+    $.post("/ratings", { 
+      rating: { 
+        mark: ratingVal, 
+        title: titleVal, 
+        comment: commentVal, 
+        book_id: bookId 
+        } 
+      }, function(data) {
       $("#review-form").replaceWith(data);
       $("#add-review").hide();
       $('input[type="radio"].star').rating('enable');       
     });
   });
-
 });

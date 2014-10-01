@@ -4,6 +4,4 @@ class CreditCard < ActiveRecord::Base
 
   validates :number, presence: true
   validates :expiration_date, presence: true
-  validates :firstname, presence: true
-  validates :lastname, presence: true
 end

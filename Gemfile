@@ -43,6 +43,8 @@ gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'devise'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'omniauth', '1.2.2'
+gem 'omniauth-facebook', '~>2.0.0'
 
 group :development, :test do
   gem 'rspec-rails'

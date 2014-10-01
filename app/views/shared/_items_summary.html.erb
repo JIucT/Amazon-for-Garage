@@ -1,0 +1,42 @@
+<table class="width100">
+  <tbody>
+    <tr class="text-align-center">
+      <td class="width65">BOOK</td>
+      <td class="width10">PRICE</td>
+      <td class="width10">QTY</td>
+      <td class="width10">TOTAL</td>
+      <td class="width5"> </td>    
+    </tr>
+    <% if current_page? "orders/checkout" %>
+      <% width = 'widt70' %>
+    <% else %>
+      <% width = 'width65' %>
+    <% end %>
+    <% @items.each_with_index do |book, index| %>
+      <tr id="<%=book.id%>" class="item-in-cart">
+        <td class="<%= width %> padding-bottom15px">
+          <%= image_tag book.cover, { class: 'width10 vertical-align-top' } %>       
+          <div class="margin-left5px display-inline-block width85">
+            <p class="font-size16px"><b><%= book.title %></b></p>
+            <p class=""><%= book.description %></p>
+          </div>
+        </td>
+        <td class="width10 text-align-center padding-bottom5px">
+          <b><%= book.price %>$</b>
+        </td>
+        <td class="width10 text-align-center padding-bottom5px">
+          <%= @qty[index] %>
+        </td>
+        <td class="width10 text-align-center padding-bottom5px">
+          <b><%= book.price * @qty[index].to_i %>$</b>
+        </td>
+        <% if current_page? "/orders/cart" %>
+          <td class="width5">
+            <span class="glyphicon glyphicon-remove remove_item" id=<%="#{book.id}|#{@qty[index]},"%>></span>
+          </td>    
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>

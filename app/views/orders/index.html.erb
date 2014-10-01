@@ -1,0 +1,29 @@
+<h3>Orders</h4>
+<% if (cookies[:ordered_items].nil? || cookies[:ordered_items].empty?) && 
+  Order.where(user_id: current_user.id, state: ['in progress', 'in delivery', 'delivered']).empty? %>
+  <h3>You have no orders yet</h3>
+<% end %>
+<% if (!cookies[:ordered_items].nil? && !cookies[:ordered_items].empty?) %>
+  <h4 class="margin-bottom0px">IN PROGRESS</h4>
+  <hr class="margin-top0px">
+  <%= render partial: "shared/items_summary" %>
+  <p class="float-right margin-right9 margin-bottom5">SUBTOTAL:&nbsp;<b><%=@total%>$</b></p>
+<% end %>
+<% orders_in_progress = Order.where(user_id: current_user.id, state: 'in progress') %>
+<% unless orders_in_progress.empty? %>
+  <h4 class="margin-bottom0px clear-both">WAITING FOR PROCESSING</h4>
+  <hr class="margin-top0px">
+  <%= render partial: "orders_status", locals: { orders: orders_in_progress } %>
+<% end %>
+<% orders_in_delivery = Order.where(user_id: current_user.id, state: 'in delivery') %>
+<% unless orders_in_delivery.empty? %>
+  <h4 class="margin-bottom0px clear-both">IN DELIVERY</h4>
+  <hr class="margin-top0px">
+  <%= render partial: "orders_status", locals: { orders: orders_in_delivery } %>
+<% end %>
+<% orders_delivered = Order.where(user_id: current_user.id, state: 'delivered') %>
+<% unless orders_delivered.empty? %>
+  <h4 class="margin-bottom0px clear-both">DELIVERED</h4>
+  <hr class="margin-top0px">
+  <%= render partial: "orders_status", locals: { orders: orders_delivered } %>
+<% end %>

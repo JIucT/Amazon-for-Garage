@@ -17,4 +17,5 @@
 //= require bootstrap-sprockets
 //= require jquery-star-rating
 //= require jquery.cookie.js
+//= require multi-steps-form.js
 

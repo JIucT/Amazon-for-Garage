@@ -57,8 +57,6 @@ $(document).ready( function() {
   carouselSetUp();
   markShopCategories();
 
-//  $(".main-shop-link").unbind('click');
-//  $(".main-home-link").unbind('click');
   $(".main-shop-link").click( function() {
     replaceMain("/books/index_shop");
   });

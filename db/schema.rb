@@ -11,19 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825144958) do
+ActiveRecord::Schema.define(version: 20141001163130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
     t.string   "address1",      null: false
-    t.string   "address2",      null: false
     t.string   "city",          null: false
     t.string   "country",       null: false
-    t.string   "state",         null: false
+    t.string   "state"
     t.string   "zip_code",      null: false
-    t.string   "mobile_number", null: false
+    t.string   "mobile_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,8 +59,6 @@ ActiveRecord::Schema.define(version: 20140825144958) do
   create_table "credit_cards", force: true do |t|
     t.string   "number",          null: false
     t.date     "expiration_date", null: false
-    t.string   "firstname",       null: false
-    t.string   "lastname",        null: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -90,6 +87,9 @@ ActiveRecord::Schema.define(version: 20140825144958) do
     t.integer  "credit_card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "shipping_type"
+    t.string   "number"
+    t.date     "completed_at"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
@@ -123,6 +123,9 @@ ActiveRecord::Schema.define(version: 20140825144958) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "current_order_id"
+    t.integer  "address_id"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

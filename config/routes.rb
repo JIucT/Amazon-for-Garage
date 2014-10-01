@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_scope :user do
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_omniauth_user_session
+  end  
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -13,8 +16,13 @@ Rails.application.routes.draw do
     get 'index_shop', on: :collection
   end
 
-  #post controller: "ratings", action: "create"
+  resources :orders do
+    get 'cart', on: :collection
+    get 'checkout', on: :collection
+  end
+  
   post "ratings" => 'ratings#create', as: :create_rating
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

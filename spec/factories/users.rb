@@ -11,7 +11,8 @@ FactoryGirl.define do
     after(:create) do |user|
       create_list(:order, Faker::Number.digit.to_i + 1, user: user)
       create_list(:rating, Faker::Number.digit.to_i + 1, user: user)
-      create(:credit_card, user: user)
+      create(:credit_card, user: user)      
+      address_id = create(:address)     
     end
   end
 end

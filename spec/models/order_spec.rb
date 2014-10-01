@@ -5,12 +5,12 @@ RSpec.describe Order, :type => :model do
 
   context "validations" do
     it { expect(order).to validate_presence_of(:total_price) }
-    it { expect(order).to validate_presence_of(:state) }
-
+    it { expect(order).to validate_presence_of(:shipping_type) }
+    it { expect(order).to validate_presence_of(:completed_at) }
   end
 
   it "should have a state" do
-    expect(order.state).to be_in(['in progress', 'complited', 'shipped'])
+    expect(order.state).to be_in(['in progress', 'delivered', 'in delivery'])
   end
 
   it "should have default state" do
