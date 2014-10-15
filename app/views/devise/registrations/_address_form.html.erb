@@ -1,0 +1,21 @@
+    <div class="form-group">
+      <%= f.text_field :address1, { autofocus: true, type: "text", class: "form-control", placeholder: "Street, building and apt.", required: "required" } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :city, { type: "text", class: "form-control", placeholder: "City/Town", required: "required" } %>
+    </div>
+
+    <div class="form-group">
+      <%= render partial: "/shared/countries_dropdown.html.erb", locals: { name: "address[country]", country: nil } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :zip_code, { type: "number", class: "form-control width50", placeholder: "Zip", required: "required" } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :mobile_number, { type: "tel", class: "form-control", placeholder: "Phone", required: "required" } %>
+    </div>
+
+    <%= f.submit "Save", class: "btn btn-default" %>

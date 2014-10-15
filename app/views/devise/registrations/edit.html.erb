@@ -1,29 +1,63 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
-
-  <div><%= f.submit "Update" %></div>
+<% unless (flash[:change_settings_msg].nil? || flash[:change_settings_msg].empty?) %>
+  <p id='flash-info' class='alert alert-info' role='alert'> <%= flash[:change_settings_msg] %></p>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h2>Settings</h2>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="edit-addr hr-thin-grey">
+  <h4>BILLING ADDRESS</h4>
+  <hr>
+  <%= form_for(:address, url: change_billing_address_users_path, html: { class: "width50 float-left margin-top20px", role: "form" } ) do |f| %>
+    <%= render partial: "address_form", locals: { f: f } %>
+  <% end %>
+</div>
 
-<%= link_to "Back", :back %>
+<div class="edit-addr hr-thin-grey" id="edit-shipping-addr">
+  <h4>SHIPPING ADDRESS</h4>
+  <hr>
+  <%= form_for(:address, url: change_shipping_address_users_path, html: { class: "width50 float-left margin-top20px", role: "form" } ) do |f| %>
+  <%= render partial: "address_form", locals: { f: f } %>
+  <% end %>
+</div>
+
+<div id="edit-email" class="hr-thin-grey">
+  <h4>EMAIL</h4>
+  <hr>
+  <%= form_for(:email, url: change_email_users_path, html: { class: "width50 float-left margin-top20px", role: "form" } ) do |f| %>
+    <div class="form-group">
+      <% ph = "#{current_user.email}" %>
+      <%= f.email_field :email, { type: "email", class: "form-control", value: ph, required: "required" } %>
+    </div>  
+    <%= f.submit "Save", class: "btn btn-default" %>    
+  <% end %>
+</div>
+
+<% if current_user.provider.nil? %>
+  <div id="edit-password" class="hr-thin-grey">
+    <h4>PASSWORD</h4>
+    <hr>
+    <%= form_for(:password, url: change_password_users_path, html: { class: "width50 float-left margin-top20px", role: "form" } ) do |f| %>
+      <div class="form-group">
+        <label for="current-password">Current Password</label>
+        <%= f.password_field :current_password, { type: "password", class: "form-control", id: "current-password", required: "required" } %>
+      </div>  
+      <div class="form-group">
+        <label for="password">New Password</label>
+        <%= f.password_field :password, { type: "password", class: "form-control", id: "password", required: "required" } %>
+      </div>  
+      <div class="form-group">
+        <label for="password_confirmation">Confirm New Password</label>
+        <%= f.password_field :password_confirmation, { type: "password", class: "form-control", id: "password_confirmation", required: "required" } %>
+      </div>
+      <%= f.submit "Save", class: "btn btn-default" %>    
+    <% end %>
+  </div>
+<% end %>
+
+
+
+<div class="clear-both margin-top50px hr-thin-grey">
+  <h4>REMOVE ACCOUNT</h4>
+  <hr>
+  <%= button_to "Cancel my account", registration_path(resource_name), class: "btn btn-default margin-top20px", data: { confirm: "All data will be deleted. Are you sure?" }, method: :delete %>
+</div>

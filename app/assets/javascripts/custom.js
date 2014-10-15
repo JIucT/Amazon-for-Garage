@@ -1,4 +1,16 @@
 $(document).ready( function() {
+  
+  $("#flash-info").fadeOut(5000);
+
+  if ($(".alert-bookstore").text().trim().length > 0) {
+    var height = parseInt($(".center-window").css("height"));
+    if (window.location.pathname == '/users' || window.location.pathname == '/users/sing_up') {
+      height += parseInt($("#end-of-header").css('height'));
+    }
+    $(".center-window").css("height", height).toString();
+    $(".alert-bookstore").show("slow");
+  }
+
 
   function replaceMain(link, params, id) {
     params = params || { no_layout: true }

@@ -44,26 +44,26 @@ class OrdersController < ApplicationController
       country: order_params[:bil_country], zip_code: order_params[:bil_zip],
       mobile_number: order_params[:bil_mobile] })
     unless bil_address.save
-      render "shared/something_went_wrong"
+      render "shared/shared/something_went_wrong"
     end
     ship_address = Address.new({  address1: order_params[:ship_street],
      city: order_params[:ship_city], country: order_params[:ship_country],
      zip_code: order_params[:ship_zip] })
     unless ship_address.save
-      render "shared/something_went_wrong"
+      render "shared/shared/something_went_wrong"
     end    
     credit_card = CreditCard.new({ number: order_params[:card_number],
      expiration_date: Date.new(order_params[:card_exp_year].to_i, order_params[:card_exp_month].to_i, 1),
      user_id: current_user.id })
     unless credit_card.save!
-      render "shared/something_went_wrong"
+      render "shared/shared/something_went_wrong"
     end    
     order = Order.new({ total_price: order_params[:total_price].to_f,
       billing_address_id: bil_address.id, shipping_address_id: ship_address.id,
         user_id: current_user.id, credit_card_id: credit_card,
         shipping_type: order_params[:shipping_type] })
     unless order.save!
-      render "shared/something_went_wrong"
+      render "shared/shared/something_went_wrong"
     end
     cookies[:ordered_items].split(',').each do |item|
       book_id = item.split('|')[0].to_i
@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
       redirect_to index_shop_books_path 
     end 
     user = current_user
-    address = current_user.address
+    address = current_user.billing_address
     @first_name = user.firstname
     @last_name = user.lastname
     unless address.nil?

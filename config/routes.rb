@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root to: "books#index"
 
-  resources :users
+  resources :users do
+    post 'change_billing_address', :to => 'users#change_billing_address', :as => :change_billing_address, on: :collection    
+    post 'change_shipping_address', :to => 'users#change_shipping_address', :as => :change_shipping_address, on: :collection 
+    post 'change_email', :to => 'users#change_email', :as => :change_email, on: :collection 
+    post 'change_password', :to => 'users#change_password', :as => :change_password, on: :collection    
+  end
   resources :books do
     get 'index_shop', on: :collection
   end

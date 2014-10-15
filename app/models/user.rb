@@ -2,13 +2,13 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
    devise :database_authenticatable, :registerable,
-          :rememberable, :trackable, :validatable
-  has_many :orders
+          :rememberable, :trackable, :validatable 
+  has_many :orders, dependent: :destroy
   has_many :ratings
-  belongs_to :address
-  belongs_to :current_order, class: Order
+  belongs_to :billing_address, class: Address, dependent: :destroy
+  belongs_to :shipping_address, class: Address, dependent: :destroy 
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, uniqueness: true
   validates :firstname, presence: true
   validates :lastname, presence: true
 
@@ -23,10 +23,12 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first do |user|
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.firstname = auth.info.name   # assuming the user model has a name
+      user.firstname = auth.info.first_name   # assuming the user model has a name
+      user.lastname = auth.info.last_name
+
     #  user.image = auth.info.image # assuming the user model has an image
     end
   end
@@ -35,6 +37,8 @@ class User < ActiveRecord::Base
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
+        user.firstname = data["first_name"] if user.firstname.blank?
+        user.lastname = data["last_name"] if user.lastname.blank?
       end
     end
   end

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   after_filter :store_location
+  before_action :configure_devise_permitted_parameters, if: :devise_controller?  
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -13,8 +14,8 @@ class ApplicationController < ActionController::Base
         request.path != "/users/password/edit" &&
         request.path != "/users/confirmation" &&
         request.path != "/users/sign_out" &&
-        !request.xhr?) # don't store ajax calls
-      session[:previous_url] = request.fullpath 
+        !request.xhr?) # don't store ajax calls      
+      session[:previous_url] = request.fullpath
     end
   end
 
@@ -24,6 +25,15 @@ class ApplicationController < ActionController::Base
 
 
   rescue_from CanCan::AccessDenied do |exception|
-    raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError.new('Not Found')    
+  end  
+
+private 
+  
+  def configure_devise_permitted_parameters
+    registration_params = [:firstname, :lastname, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.for(:sign_up) {
+      |u| u.permit(registration_params)
+    }
   end  
 end

@@ -4,9 +4,10 @@
 
 
 body {
-  margin: 0px 8% 0px 8% !important;
   padding-bottom: 70px !important;
   background-color: transparent !important;
+  max-width: 80em;
+  margin: 0 auto !important;
 } 
 
 .min-width15px {
@@ -303,6 +304,10 @@ body {
 
 .margin-top30px {
   margin-top: 30px !important;
+}
+
+.margin-top50px {
+  margin-top: 50px !important;
 }
 
 .margin-top20 {

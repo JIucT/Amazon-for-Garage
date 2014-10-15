@@ -1,4 +1,5 @@
-<select required class="form-control margin-bottom10px countries-select">
+<% name ||= "country_select" %>
+<select required class="form-control margin-bottom10px countries-select" <%= "name=#{name}" %>>
     <% if country.nil? %>
         <option selected disabled value="Country">Country</option>    
     <% else %>
