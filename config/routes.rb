@@ -1,9 +1,32 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_scope :user do
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_omniauth_user_session
+  end  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root to: "books#index"
+
+  resources :users do
+    post 'change_billing_address', :to => 'users#change_billing_address', :as => :change_billing_address, on: :collection    
+    post 'change_shipping_address', :to => 'users#change_shipping_address', :as => :change_shipping_address, on: :collection 
+    post 'change_email', :to => 'users#change_email', :as => :change_email, on: :collection 
+    post 'change_password', :to => 'users#change_password', :as => :change_password, on: :collection    
+  end
+  resources :books do
+    get 'index_shop', on: :collection
+  end
+
+  resources :orders do
+    get 'cart', on: :collection
+    get 'checkout', on: :collection
+  end
+  
+  post "ratings" => 'ratings#create', as: :create_rating
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

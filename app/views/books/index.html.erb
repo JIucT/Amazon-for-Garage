@@ -1,0 +1,40 @@
+<div class="carousel slide width75 align-center" id="main">
+  <!-- Wrapper for slides -->
+  <% active = true %>
+  <div class="carousel-inner">
+    <% @books.each do |book| %>
+      <% if active %>
+        <div class="item active"> 
+      <% else %>
+        <div class="item">
+      <% end %>
+        <div class="width75 align-center">
+          <div class="display-block">
+            <h3 class="display-inline"><%= book.title %></h3>
+            <div class="display-inline-block min-width50px min-height1px"> </div>
+            <p class="display-inline">by <%= book.author.firstname %> <%= book.author.lastname %></p>
+          </div>
+          <div class="display-block min-height10px"></div>
+            <div class="display-block">
+              <a href=<%= "/books/#{book.id}" %>>
+                <%= image_tag book.cover, { class: "display-inline", size: '160' } %>
+              </a>
+              <div class="min-width10px min-height1px display-inline-block"></div>
+              <div class="display-inline position-absolute margin-right130px">
+                <p class="break-word"><%= book.description %></p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <% active = false %>
+    <% end %>
+  </div>
+ 
+  <!-- Controls -->
+  <a class="left carousel-control" id="main-corusel-prev" role="button">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" id="main-corusel-next" role="button">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>

@@ -1,0 +1,7 @@
+<%= link_to "<< Back to orders", orders_path %>
+<h3>Order <%=@order.number%> <small><%=@order.state%></small></h3>
+<%= render partial: 'shared/items_summary' %>
+<p class="float-right">SUBTOTAL:&nbsp;<b>$<%=@order.total_price - @shipping_price%></b></p>
+<p class="float-right clear-both">SHIPPING:&nbsp;<b>$<%=@shipping_price%></b></p>
+<hr class="clear-both">
+<p class="float-right">ORDER TOTAL:&nbsp;<b>$<%=@order.total_price%></b></p>

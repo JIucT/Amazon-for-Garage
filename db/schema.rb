@@ -11,19 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726161605) do
+ActiveRecord::Schema.define(version: 20141013060112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
     t.string   "address1",      null: false
-    t.string   "address2",      null: false
     t.string   "city",          null: false
     t.string   "country",       null: false
-    t.string   "state",         null: false
+    t.string   "state"
     t.string   "zip_code",      null: false
-    t.string   "mobile_number", null: false
+    t.string   "mobile_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140726161605) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cover"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
@@ -59,23 +59,12 @@ ActiveRecord::Schema.define(version: 20140726161605) do
   create_table "credit_cards", force: true do |t|
     t.string   "number",          null: false
     t.date     "expiration_date", null: false
-    t.string   "firstname",       null: false
-    t.string   "lastname",        null: false
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
-
-  create_table "customers", force: true do |t|
-    t.string   "password_digest", null: false
-    t.string   "email",           null: false
-    t.string   "firstname",       null: false
-    t.string   "lastname",        null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "credit_cards", ["user_id"], name: "index_credit_cards_on_user_id", using: :btree
 
   create_table "order_items", force: true do |t|
     t.decimal  "price",      null: false
@@ -90,30 +79,55 @@ ActiveRecord::Schema.define(version: 20140726161605) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.decimal  "total_price",                                 null: false
-    t.datetime "completed_at",                                null: false
+    t.decimal  "total_price",         default: 0.0,           null: false
     t.string   "state",               default: "in progress", null: false
-    t.integer  "billing_address_id",                          null: false
+    t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.integer  "credit_card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "shipping_type"
+    t.string   "number"
+    t.date     "completed_at"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "ratings", force: true do |t|
     t.text     "comment"
-    t.integer  "mark",        null: false
-    t.integer  "customer_id"
+    t.integer  "mark",       null: false
+    t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title",      null: false
   end
 
   add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
-  add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email",                               null: false
+    t.string   "firstname",                           null: false
+    t.string   "lastname",                            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_admin",            default: false
+    t.string   "encrypted_password",  default: "",    null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "shipping_address_id"
+    t.integer  "billing_address_id"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

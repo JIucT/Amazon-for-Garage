@@ -5,13 +5,12 @@ RSpec.describe Order, :type => :model do
 
   context "validations" do
     it { expect(order).to validate_presence_of(:total_price) }
+    it { expect(order).to validate_presence_of(:shipping_type) }
     it { expect(order).to validate_presence_of(:completed_at) }
-    it { expect(order).to validate_presence_of(:state) }
-
   end
 
   it "should have a state" do
-    expect(order.state).to be_in(['in progress', 'complited', 'shipped'])
+    expect(order.state).to be_in(['in progress', 'delivered', 'in delivery'])
   end
 
   it "should have default state" do
@@ -19,7 +18,7 @@ RSpec.describe Order, :type => :model do
   end
 
   context "relations" do
-    it { expect(order).to belong_to(:customer) }
+    it { expect(order).to belong_to(:user) }
     it { expect(order).to belong_to(:credit_card) }
     it { expect(order).to belong_to(:billing_address) }
     it { expect(order).to belong_to(:shipping_address) }

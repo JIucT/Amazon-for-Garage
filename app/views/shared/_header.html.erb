@@ -1,0 +1,44 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">  
+  <div class="navbar-header">
+    <%= link_to "The Bookstore", index_shop_books_path, { class: "navbar-brand", role: "button" } %>
+  </div>
+  <% if !(current_page?(books_path) || current_page?(root_path) || current_page?(index_shop_books_path)) %> 
+    <% show_menu = "visibility-hidden" %>
+  <% else %>
+    <% show_menu = "" %>  
+  <% end %>  
+  <ul class="nav navbar-nav margin-left30">
+    <li class=<%=show_menu%>><a href="/books" class="remove-sides-paddings internal-ref main-home-link">HOME</a></li>
+    <li class=<%=show_menu%>><p class="navbar-text margin-sides-5px ">|</p></li>
+    <li class=<%=show_menu%>><a href="/books/index_shop" class="remove-sides-paddings internal-ref main-shop-link #{show_menu}">SHOP</a></li>
+    <% if can? :manage, :all %>
+      <li class=<%=show_menu%>><p class="navbar-text margin-sides-5px ">|</p></li>
+      <li class=<%=show_menu%>><a href="/admin" class="remove-sides-paddings #{show_menu}">Administrate</a></li>
+    <% end %>
+    <% if !current_page?(cart_orders_path) %>
+      <li> <a href="/orders/cart" class="nav navbar-nav margin-left40">
+        <span class="glyphicon glyphicon-shopping-cart"></span> CART
+        <span class="badge pull-right margin-sides-5px" id="cart-status"><%= cart_status %></span></a>
+      </li>
+    <% end %>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <% if user_signed_in? %>
+      <li><%= link_to "Settings", edit_user_registration_path, { class: "remove-sides-paddings"} %> </li>
+      <li><p class="navbar-text margin-sides-5px ">|</p> </li>
+      <li><%= link_to "Orders", orders_path, { class: "remove-sides-paddings"} %> </li>
+      <li><p class="navbar-text margin-sides-5px ">|</p> </li>
+      <li id="authorization_fix"><%= link_to 'Sign out', destroy_user_session_path, { class: "remove-sides-paddings", method: :delete } %></li>
+    <% else %>
+      <% if ((request.path == "/users" && request.post? ) || current_page?(new_user_registration_path)) %>
+        <li id="authorization_fix"><%= link_to 'Sign in', new_user_session_path, { class: "remove-sides-paddings"} %></li>
+      <% elsif (request.path == user_session_path) %>
+        <li id="authorization_fix"><%= link_to 'Sign up', new_user_registration_path, { class: "remove-sides-paddings"} %></li>
+      <% else %> 
+        <li><%= link_to 'Sign up', new_user_registration_path, { class: "remove-sides-paddings"} %></li>
+        <li><p class="navbar-text margin-sides-5px">|</p> </li>          
+        <li id="authorization_fix"><%= link_to 'Sign in', new_user_session_path, { class: "remove-sides-paddings"} %></li>          
+      <% end %>
+    <% end %> 
+  </ul>
+</nav>

@@ -10,7 +10,6 @@ RSpec.describe Book, :type => :model do
   end
 
   context "relations" do
-    it { expect(book).to have_many(:ratings).through(:customers) }
     it { expect(book).to belong_to(:author) }
     it { expect(book).to belong_to(:category) }
   end
