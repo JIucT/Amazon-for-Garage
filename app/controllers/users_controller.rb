@@ -2,20 +2,30 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def change_billing_address
+    new_addr_id = address_create
+    unless new_addr_id
+      return
+    end
     current_user.billing_address.destroy unless current_user.billing_address.nil?
-    current_user.billing_address_id = address_create
+    current_user.billing_address_id = new_addr_id
     unless current_user.save
       render "shared/something_went_wrong"
+      return
     end        
     flash[:change_settings_msg] = "Billing address successfully updated"
     redirect_to edit_user_registration_path
   end
 
   def change_shipping_address
+    new_addr_id = address_create
+    unless new_addr_id
+      return
+    end    
     current_user.shipping_address.destroy  unless current_user.shipping_address.nil?
-    current_user.shipping_address_id = address_create
+    current_user.shipping_address_id = new_addr_id
     unless current_user.save
       render "shared/something_went_wrong"
+      return
     end        
     flash[:change_settings_msg] = "Shipping address successfully updated"
     redirect_to edit_user_registration_path
@@ -25,6 +35,7 @@ class UsersController < ApplicationController
     current_user.email = email_params[:email]
     unless current_user.save
       render "shared/something_went_wrong"
+      return
     end    
     flash[:change_settings_msg] = "Email successfully updated"
     redirect_to edit_user_registration_path
@@ -32,7 +43,6 @@ class UsersController < ApplicationController
 
   def change_password
     user = current_user
-    Rails.logger.debug(password_params)
     if user.update_with_password(password_params)
       sign_in user, :bypass => true
       flash[:change_settings_msg] = "Password successfully updated"
@@ -59,6 +69,7 @@ private
     new_addr = Address.new(address_params)
     unless new_addr.save
       render "shared/something_went_wrong"
+      return false
     end
     return new_addr.id
   end

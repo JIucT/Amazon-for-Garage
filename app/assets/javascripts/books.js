@@ -49,7 +49,7 @@ $(document).ready( function() {
       }, function(data) {
       $("#review-form").replaceWith(data);
       $("#add-review").hide();
-      $('input[type="radio"].star').rating('enable');       
+      $('input[type="radio"].star').rating();       
     });
   });
 });

@@ -53,7 +53,7 @@ group :development, :test do
 end
 
 group :test do
- # gem 'capybara'
+  gem 'capybara'
   # gem 'capybara-webkit'
  # gem 'selenium-webdriver'
   gem 'database_cleaner'

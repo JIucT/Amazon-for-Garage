@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :order_item do
-    price Faker::Number.decimal(2).to_f
-    quantity Faker::Number.digit.to_f
+    price { Faker::Number.decimal(2).to_f }
+    quantity { Faker::Number.digit.to_f }
+    book_id { FactoryGirl.create(:book).id }
   end
 end

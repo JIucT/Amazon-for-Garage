@@ -1,6 +1,7 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
-    Rails.logger.debug(rating_params)
     @rating = Rating.create(rating_params.merge({ user_id: current_user.id }))
     render 'create', layout: false, locals: { user: current_user }
   end

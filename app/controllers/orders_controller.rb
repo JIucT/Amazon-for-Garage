@@ -25,8 +25,7 @@ class OrdersController < ApplicationController
   def index
     @total = 0
     @items = Array.new
-    @qty = Array.new
-    @orders_in_progress = Order.where(user_id: current_user.id, status: 'in progress')
+    @qty = Array.new    
     if cookies['ordered_items']
       cookies['ordered_items'].split(',').each do |item|
         order_item = item.split('|')
@@ -36,7 +35,10 @@ class OrdersController < ApplicationController
         @total += book.price * order_item[1].to_i
       end      
     end
-
+    @orders_in_progress = Order.where(user_id: current_user.id, state: 'in progress')
+    @has_no_orders = Order.where(user_id: current_user.id, state: ['in progress', 'in delivery', 'delivered']).empty?
+    @orders_in_delivery = Order.where(user_id: current_user.id, state: 'in delivery')
+    @orders_delivered = Order.where(user_id: current_user.id, state: 'delivered')
   end
 
   def create
@@ -58,7 +60,7 @@ class OrdersController < ApplicationController
     unless credit_card.save!
       render "shared/shared/something_went_wrong"
     end    
-    order = Order.new({ total_price: order_params[:total_price].to_f,
+    order = Order.new({ total_price: order_params[:total_price].to_d,
       billing_address_id: bil_address.id, shipping_address_id: ship_address.id,
         user_id: current_user.id, credit_card_id: credit_card,
         shipping_type: order_params[:shipping_type] })
@@ -69,8 +71,8 @@ class OrdersController < ApplicationController
       book_id = item.split('|')[0].to_i
       qty = item.split('|')[1].to_i
       order_item = OrderItem.new({ order_id: order.id, book_id: book_id,
-      quantity: qty, price: Book.find(book_id) })
-     order_item.save!
+      quantity: qty, price: Book.find(book_id).price })
+      order_item.save!
     end
     cookies.delete :ordered_items, path: '/'
     render :js => "window.location = '#{index_shop_books_path}'"

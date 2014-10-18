@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.includes(:ratings).order('ratings.updated_at DESC').find(params[:id])
-    @add_review= true
+    @add_review = true
     @book.ratings.each do |rating|
       if current_user && rating.user_id == current_user.id
         @add_review = false

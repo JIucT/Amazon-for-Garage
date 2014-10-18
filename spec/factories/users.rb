@@ -7,12 +7,14 @@ FactoryGirl.define do
     lastname { Faker::Name.last_name }
     password { Faker::Internet.password(9) }
     sign_in_count { Random::rand(359) }
+    shipping_address_id { FactoryGirl.create(:address).id }
+    billing_address_id { FactoryGirl.create(:address).id }
+
 
     after(:create) do |user|
       create_list(:order, Faker::Number.digit.to_i + 1, user: user)
       create_list(:rating, Faker::Number.digit.to_i + 1, user: user)
       create(:credit_card, user: user)      
-      address_id = create(:address)     
     end
   end
 end
