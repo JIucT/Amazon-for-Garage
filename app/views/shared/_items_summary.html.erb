@@ -32,7 +32,7 @@
         </td>
         <% if current_page? "/orders/cart" %>
           <td class="width5">
-            <span class="glyphicon glyphicon-remove remove_item" id=<%="#{book.id}|#{@qty[index]},"%>></span>
+            <span class="glyphicon glyphicon-remove remove_item" name=<%="_#{book.id}|#{@qty[index]},"%> id=<%="_#{book.id}|#{@qty[index]},"%>></span>
           </td>    
         <% end %>
       </tr>

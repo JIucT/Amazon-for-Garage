@@ -11,15 +11,15 @@
 <% unless @orders_in_progress.empty? %>
   <h4 class="margin-bottom0px clear-both">WAITING FOR PROCESSING</h4>
   <hr class="margin-top0px">
-  <%= render partial: "orders_status", locals: { orders: orders_in_progress } %>
+  <%= render partial: "orders_status", locals: { orders: @orders_in_progress } %>
 <% end %>
 <% unless @orders_in_delivery.empty? %>
   <h4 class="margin-bottom0px clear-both">IN DELIVERY</h4>
   <hr class="margin-top0px">
-  <%= render partial: "orders_status", locals: { orders: orders_in_delivery } %>
+  <%= render partial: "orders_status", locals: { orders: @orders_in_delivery } %>
 <% end %>
 <% unless @orders_delivered.empty? %>
   <h4 class="margin-bottom0px clear-both">DELIVERED</h4>
   <hr class="margin-top0px">
-  <%= render partial: "orders_status", locals: { orders: orders_delivered } %>
+  <%= render partial: "orders_status", locals: { orders: @orders_delivered } %>
 <% end %>

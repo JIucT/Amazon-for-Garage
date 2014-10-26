@@ -6,7 +6,7 @@ FactoryGirl.define do
     description { Faker::Lorem.paragraph(2, false, 4) }
     price { Faker::Number.decimal(2).to_f }
     in_stock { Faker::Number.number(2).to_i }
-    author nil
+    author_id { FactoryGirl.create(:author).id }
     category nil
   end
 end

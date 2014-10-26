@@ -54,8 +54,7 @@ end
 
 group :test do
   gem 'capybara'
-  # gem 'capybara-webkit'
- # gem 'selenium-webdriver'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
