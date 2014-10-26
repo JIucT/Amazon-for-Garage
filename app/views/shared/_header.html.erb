@@ -17,8 +17,8 @@
     <% end %>
     <% if !current_page?(cart_orders_path) %>
       <li> <a href="/orders/cart" class="nav navbar-nav margin-left40">
-        <span class="glyphicon glyphicon-shopping-cart"></span> CART
-        <span class="badge pull-right margin-sides-5px" id="cart-status"><%= cart_status %></span></a>
+        <span class="float-left glyphicon glyphicon-shopping-cart"></span> CART
+        <span class="float-left badge pull-right margin-sides-5px" id="cart-status"><%= cart_status %></span></a>
       </li>
     <% end %>
   </ul>
