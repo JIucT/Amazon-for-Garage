@@ -46,6 +46,8 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'omniauth', '1.2.2'
 gem 'omniauth-facebook', '~>2.0.0'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
