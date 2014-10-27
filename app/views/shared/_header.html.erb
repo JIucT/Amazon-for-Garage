@@ -11,7 +11,7 @@
     <li class=<%=show_menu%>><a href="/books" class="remove-sides-paddings internal-ref main-home-link">HOME</a></li>
     <li class=<%=show_menu%>><p class="navbar-text margin-sides-5px ">|</p></li>
     <li class=<%=show_menu%>><a href="/books/index_shop" class="remove-sides-paddings internal-ref main-shop-link #{show_menu}">SHOP</a></li>
-    <% if can? :manage, :all %>
+    <% if can? :access, :rails_admin %>
       <li class=<%=show_menu%>><p class="navbar-text margin-sides-5px ">|</p></li>
       <li class=<%=show_menu%>><a href="/admin" class="remove-sides-paddings #{show_menu}">Administrate</a></li>
     <% end %>

@@ -45,6 +45,8 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'omniauth', '1.2.2'
 gem 'omniauth-facebook', '~>2.0.0'
+gem "paperclip", "~> 4.2"
+
 
 gem 'rails_12factor', group: :production
 

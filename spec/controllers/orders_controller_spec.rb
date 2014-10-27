@@ -8,6 +8,7 @@ RSpec.describe OrdersController, :type => :controller do
 
   before do
     sign_in user
+    order.update(user_id: user.id)
   end
 
   describe "GET #show" do    
@@ -46,6 +47,13 @@ RSpec.describe OrdersController, :type => :controller do
       get :show, { id: order.id }
       expect(response).to render_template("show")
     end    
+
+    it "should raise exception if order dosn't belongs to current user" do
+      order.update(user_id: user.id.next)
+      expect {
+        get :show, { id: order.id }
+      }.to raise_error('Not Found')
+    end
   end
 
   describe "GET #index" do

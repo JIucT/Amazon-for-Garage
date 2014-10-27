@@ -3,19 +3,20 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    authorize! :read, @order
     @ordered_items = @order.order_items
     @items = Array.new
     @qty = Array.new
     case @order.shipping_type
-    when 'UPS Ground'
-      @shipping_price = 5
-    when 'UPS Two Days'
-      @shipping_price = 10
-    when 'UPS One Day'
-      @shipping_price = 15
-    else
-      @shipping_price = 0
-    end
+      when 'UPS Ground'
+        @shipping_price = 5
+      when 'UPS Two Days'
+        @shipping_price = 10
+      when 'UPS One Day'
+        @shipping_price = 15
+      else
+        @shipping_price = 0
+      end
     @ordered_items.each do |i|
       @items.push(Book.find(i.book_id))
       @qty.push(i.quantity)

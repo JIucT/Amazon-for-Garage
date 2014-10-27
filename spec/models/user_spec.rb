@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require "cancan/matchers"
 RSpec.describe User, :type => :model do
   let(:user) { FactoryGirl.create(:user) }
 
@@ -27,4 +27,22 @@ RSpec.describe User, :type => :model do
       expect(orders.to_a.at(0).class).to eq(Order)
     end
   end
+  
+  context "abilities" do
+    describe "when is common user" do
+      let(:ability) { Ability.new(user) }
+
+      it { expect(ability).to be_able_to(:read, Order.new(user: user)) }
+      it { expect(ability).not_to be_able_to(:access, :rails_admin) }
+    end
+
+    describe "when is admin" do
+      before(:each) do
+        user.update(is_admin: true)
+        @ability = Ability.new(user)
+      end
+      it { expect(@ability).to be_able_to(:manage, :all) }
+      it { expect(@ability).to be_able_to(:access, :rails_admin) }      
+    end
+  end  
 end
